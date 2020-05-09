@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:internshalainternshipproject/bloc_provider/single_movie_provider.dart';
 import 'package:internshalainternshipproject/model/movies.dart';
+import 'package:provider/provider.dart';
 
 class SingleGrid extends StatelessWidget {
   Movies _movies;

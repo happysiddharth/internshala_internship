@@ -16,6 +16,7 @@ class SingleMovie extends StatefulWidget {
 }
 
 class _SingleMovieState extends State<SingleMovie> {
+  bool _more = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -61,36 +62,84 @@ class _SingleMovieState extends State<SingleMovie> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      AutoSizeText(
-                        widget.id[1].original_title,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                      Row(
+                        children: <Widget>[
+                          AutoSizeText(
+                            widget.id[1].original_title,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                          AutoSizeText(
+                            " (" +
+                                widget.id[1].release_date
+                                    .toString()
+                                    .substring(0, 4) +
+                                ")",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                        ],
                       ),
-                      AutoSizeText(
-                        widget.id[1].release_date.substring(0, 4),
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      Row(
+                        children: <Widget>[
+                          AutoSizeText(
+                            widget.id[1].release_date,
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                          AutoSizeText(
+                            "(" +
+                                widget.id[1].original_language
+                                    .toString()
+                                    .toUpperCase() +
+                                ")",
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.thumb_up),
+                          AutoSizeText(
+                            " " + widget.id[1].vote_count.toString(),
+                            style:
+                                TextStyle(color: Colors.yellow, fontSize: 15),
+                          ),
+                        ],
                       ),
                       Divider(
                         color: Colors.white,
                       ),
-                      AutoSizeText(
-                        widget.id[1].overview,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: AutoSizeText(
+                              widget.id[1].overview.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
                   child: Divider(
                     color: Colors.white,
                   ),
                 ),
                 ChangeNotifierProvider.value(
-                    value: SingleMovieProvider(),
-                    child: BottomSingleMovie(widget.id[0])),
+                  value: SingleMovieProvider(),
+                  child: Container(
+                    child: BottomSingleMovie(
+                      widget.id[0],
+                    ),
+                  ),
+                ),
               ],
             )
           ],

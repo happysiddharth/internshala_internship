@@ -23,20 +23,24 @@ class HomeScreenProvider with ChangeNotifier {
       }
       List<Movies> _loadedProducts = [];
       extractedData.forEach((data) {
-        _loadedProducts.add(Movies(
-          id: data['id'],
-          title: data['title'].toString(),
-          adult: data['adult'],
-          backdrop_path: data['backdrop_path'],
-          original_language: data['original_language'],
-          original_title: data['original_title'],
-          overview: data['overview'],
-          popularity: data['popularity'],
-          poster_path: data['poster_path'],
-          release_date: data['release_date'],
-          video: data['video'],
-          vote_count: data['vote_count'],
-        ));
+        Movies _temp = Movies(
+            id: data['id'],
+            title: data['title'].toString(),
+            adult: data['adult'],
+            backdrop_path: data['backdrop_path'],
+            original_language: data['original_language'],
+            original_title: data['original_title'],
+            overview: data['overview'],
+            popularity: data['popularity'],
+            poster_path: data['poster_path'],
+            release_date: data['release_date'],
+            video: data['video'],
+            vote_count: data['vote_count'],
+            genre_ids: []);
+        data['genre_ids'].forEach((g) {
+          _temp.genre_ids.add(g.toString());
+        });
+        _loadedProducts.add(_temp);
       });
       print("object" + _loadedProducts.length.toString());
       _movies = _loadedProducts;

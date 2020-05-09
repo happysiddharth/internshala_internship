@@ -90,9 +90,11 @@ class _BottomSingleMovieState extends State<BottomSingleMovie> {
         : info.length > 0
             ? Expanded(
                 child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) {
                     return Container(
                       height: 100,
+                      width: MediaQuery.of(context).size.width,
                       child: Card(
                         color: Color.fromRGBO(38, 38, 38, 0.1),
                         child: Column(
